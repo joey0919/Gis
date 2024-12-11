@@ -42,3 +42,9 @@ WHERE ST_SRID(geom) = 5186;
 UPDATE geocoded_data
 SET geom = ST_Transform(geom, 5186)
 WHERE ST_SRID(geom) = 4326;
+
+-- 정보확인
+SELECT id, ST_AsText(geom), ST_SRID(geom)
+FROM result_2024
+LIMIT 5;
+
