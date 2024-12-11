@@ -33,3 +33,12 @@ WHERE a.geom = subquery.geom;
 SELECT bar, geom
 FROM "인구-가맹점GIS융합정보_양천구"
 
+-- 2024 추가 -- geocoded_data: 포인트 변환시 위경도를 사용했으면 (127, 37등) 4326 후 5186 이런식으로해야됨
+    
+UPDATE geocoded_data
+SET geom = ST_SetSRID(geom, 4326)
+WHERE ST_SRID(geom) = 5186;
+
+UPDATE geocoded_data
+SET geom = ST_Transform(geom, 5186)
+WHERE ST_SRID(geom) = 4326;
